@@ -1,0 +1,16 @@
+# Native binary addons
+*.node
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Logs and runtime artifacts
+*.log
+tmp/
+temp/

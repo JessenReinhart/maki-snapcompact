@@ -1,0 +1,10 @@
+{
+  "enableAuto": true,
+  "hideImagesInChat": true,
+  "summaryDisplayText": "Conversation history archived to images.",
+  "maxFrames": 8,
+  "contextAuto": {
+    "enabled": true,
+    "ratio": 0.85
+  }
+}
