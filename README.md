@@ -38,44 +38,36 @@ context window overflows.
 
 ## Install
 
-Copy the plugin into Maki's global config directory (`~/.config/maki` on Linux /
-macOS, `%USERPROFILE%\.config\maki` on Windows Maki; also mirrored to
-`AppData\Roaming\maki` on Windows):
+### Via Maki's package manager (recommended)
 
-```text
-.config/maki/
-├── init.lua                  # require("snapcompact.init") + setup()
-├── plugin.toml               # plugin permissions
-├── snapcompact.json          # runtime-generated config (or snapcompact.json.example)
-├── bin/
-│   └── snapcompact-render.cjs
-└── lua/
-    └── snapcompact/
-        ├── init.lua
-        ├── compact.lua
-        ├── constants.lua
-        ├── normalize.lua
-        ├── plan.lua
-        ├── render.lua
-        ├── selftest.lua
-        ├── serialize.lua
-        ├── shapes.lua
-        └── stopwords.lua
-```
-
-Add to `init.lua`:
+Add this line to `~/.config/maki/init.lua`:
 
 ```lua
-local ok, snapcompact = pcall(require, "snapcompact.init")
-if ok and snapcompact then
-  pcall(snapcompact.setup)
-end
+maki.pack.add({ "https://github.com/JessenReinhart/maki-snapcompact" })
 ```
+
+Start Maki, approve the one-time permission prompt, and the tool is loaded.
+The package installs into Maki's XDG data directory, pinned to a commit via
+`pack-lock.json`. Update later with `/packupdate maki-snapcompact`.
+
+### Manual install
+
+Clone into a Neovim-style package directory:
+
+```
+<maki-data>/site/pack/<group>/start/maki-snapcompact/
+```
+
+`<maki-data>` is Maki's data directory (Linux: `~/.local/share/maki`; Windows:
+`%LOCALAPPDATA%\maki` or the XDG-equivalent Maki resolves). `<group>` can be any
+name besides `core`. A `start` package loads at startup with no approval step.
+
+## Configuration
 
 `setup()` accepts an optional table for explicit overrides
 (`enableAuto`, `hideImagesInChat`, `summaryDisplayText`, `maxFrames`,
 `contextAuto = { enabled, ratio }`). Caller config > persisted
-`snapcompact.json` > built-in defaults.
+`snapcompact.json` (in Maki's config dir) > built-in defaults.
 
 ## Commands
 

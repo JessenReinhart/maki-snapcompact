@@ -1,3 +1,5 @@
+min_maki_version = "0.7.0"
+
 [permissions]
 fs_read = true
 fs_write = true
@@ -7,4 +9,3 @@ agent = true
 session_read = true
 session_write = true
 session_settings = true
-input = true

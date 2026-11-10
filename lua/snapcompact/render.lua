@@ -1,7 +1,20 @@
 local M = {}
 
+local PACKAGE_NAME = "maki-snapcompact"
+
 local function find_script_path()
   local candidates = {}
+
+  -- Managed package install: resolve bin/ inside the checkout Maki cloned.
+  local ok, packages = pcall(function()
+    return maki.pack.get({ PACKAGE_NAME })
+  end)
+  if ok and packages and packages[1] and packages[1].path then
+    candidates[#candidates + 1] =
+      maki.fs.joinpath(packages[1].path, "bin", "snapcompact-render.cjs")
+  end
+
+  -- Hand-installed/dev fallbacks: global config dir and Windows mirrors.
   local cfg = maki.env.config_dir()
   if cfg then
     candidates[#candidates + 1] = maki.fs.joinpath(cfg, "bin", "snapcompact-render.cjs")
